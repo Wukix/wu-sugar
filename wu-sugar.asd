@@ -26,7 +26,7 @@
 
 (asdf:defsystem :wu-sugar
     :name "wu-sugar"
-    :description "Defines '&' for string concatenation and provies a few other useful functions."
+    :description "Defines '&' for string concatenation and provides a few other useful functions."
     :long-description "A small utility library of string, file, and date functions. In particular, defines the function '&' for string concatenation, syntactic sugar for (concatenate 'string ...). Hence the name 'wu-sugar'."
     :version "1.0.0"
     :author "Wukix Inc <engineering@wukix.com>"
