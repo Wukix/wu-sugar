@@ -1,0 +1,4 @@
+(module
+ (:fullname "/wu-sugar"
+  :depends-on ("wu-sugar")
+  :supersedes-asdf ("wu-sugar")))
