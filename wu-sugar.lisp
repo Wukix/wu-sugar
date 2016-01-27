@@ -113,7 +113,9 @@
   "Format a universal time as an ISO 8601 / RFC 3339 date. Use with format, e.g. (format t \"~/wu-sugar:format-universal-time-iso/\" (get-universal-time)). If at-sign is supplied, time will be given in local time rather than UTC."
   (declare (ignore colon))
   (multiple-value-bind (second minute hour date month year day daylight-p zone-offset)
-      (decode-universal-time universal-time)
+      (if atsign
+          (decode-universal-time universal-time)
+          (decode-universal-time universal-time 0))
     (declare (ignore day))
     (when daylight-p
       ;; This is not going to be reliable for all places in the world at all times, but w/o exact time zone data kept up to date, we assume daylight time differs from non-daylight time by one hour. See LOCAL-TIME for complete time zone handling.
@@ -123,9 +125,7 @@
 	    (truncate zone-offset)
 	  (setf offset-minutes (round (* offset-minutes 60)))
 	  (format stream "~4,'0D-~2,'0D-~2,'0DT~2,'0D:~2,'0D:~2,'0D~A~2,'0D:~2,'0D" year month date hour minute second (if (plusp zone-offset) #\- #\+) offset-hours offset-minutes))
-	(progn
-	  (incf hour zone-offset)
-	  (format stream "~4,'0D-~2,'0D-~2,'0DT~2,'0D:~2,'0D:~2,'0DZ" year month date hour minute second)))))
+	(format stream "~4,'0D-~2,'0D-~2,'0DT~2,'0D:~2,'0D:~2,'0DZ" year month date hour minute second))))
 
 (defun universal-time-to-iso (universal-time &optional local-time-zone-p)
   "Returns an ISO 8601 / RFC 3339 formatted date/time string either in UTC (the default), or the local time zone."
