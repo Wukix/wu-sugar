@@ -1,7 +1,7 @@
 wu-sugar is a small Common Lisp utility library to cut down on keystrokes. It might be similar in spirit to Alexandria, but is very minimalist.
 
 The following functions are defined:
-* **&amp;**: sugar for (concatenate 'string ...)
+* **str**: like (concatenate 'string ...), but accepts non-string arguments
 * **join**: concatenates strings, joining them by a separator character
 * **split**: splits a string (e.g. a comma-separated string)
 * **starts-with-p**: tests if a sequence begins with a particular subsequence
