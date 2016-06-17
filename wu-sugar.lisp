@@ -31,6 +31,7 @@
 (defpackage :wu-sugar
   (:use :cl)
   (:export
+   #:&
    #:str
    #:join
    #:split
@@ -45,6 +46,10 @@
 (in-package :wu-sugar)
 
 ;;; String/Sequence Functions
+
+(defun & (&rest strings)
+  "(concatenate 'string ...) with less typing. Note: deprecated in favor of STR."
+  (apply #'concatenate 'string strings))
 
 (defun str (&rest values)
   (with-output-to-string (s)
