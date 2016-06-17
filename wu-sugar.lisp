@@ -31,7 +31,7 @@
 (defpackage :wu-sugar
   (:use :cl)
   (:export
-   #:&
+   #:str
    #:join
    #:split
    #:starts-with-p
@@ -46,9 +46,10 @@
 
 ;;; String/Sequence Functions
 
-(defun & (&rest strings)
-  "(concatenate 'string ...) with less typing."
-  (apply #'concatenate 'string strings))
+(defun str (&rest values)
+  (with-output-to-string (s)
+    (dolist (val values)
+      (princ val s))))
 
 (defun join (separator &rest strings)
   "Concatenates STRINGS, joining them by SEPARATOR."
