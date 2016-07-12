@@ -31,6 +31,7 @@
 (defpackage :wu-sugar
   (:use :cl)
   (:export
+   #:hash
    #:&
    #:str
    #:join
@@ -44,6 +45,18 @@
    ))
 
 (in-package :wu-sugar)
+
+(defun hash (&rest rest)
+  "Make a hash table from key/value argument pairs."
+  (let ((table (make-hash-table :test #'equal)))
+    (loop
+       (let* ((key (if rest
+                       (pop rest)
+                       (return table)))
+              (value (if rest
+                         (pop rest)
+                         (error "Odd number of key/value argument pairs."))))
+         (setf (gethash key table) value)))))
 
 ;;; String/Sequence Functions
 
